@@ -15,8 +15,8 @@ Based on Vim and Tmux
     
 Installation:
   Follow these steps for linux:
-    cd
+```    cd
     git clone https://github.com/DredNaut/Octane-Terminal.git
     chmod 775 install.h
-    ./install.h
+    ./install.h```
     And let Octane-Terminal do the rest..
