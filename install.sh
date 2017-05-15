@@ -1,13 +1,14 @@
 echo Exporting packages
 echo .vimrc
-mv vimrc ~/.vimrc
+mv .vimrc ~/.vimrc
 echo .bashrc
-mv bashrc ~/.bashrc
+mv .bashrc ~/.bashrc
 echo .tmux.conf
-mv tmux.conf ~/.tmux.conf
+mv .tmux.conf ~/.tmux.conf
 echo .tmux_snap
-mv tmux_snap ~/.tmux_snap
+mv .tmux_snap ~/.tmux_snap
 echo
+mkdir ~/.vim
 cd ~/.vim
 mkdir bundle
 mkdir autoload
