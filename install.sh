@@ -10,13 +10,8 @@ mv .tmux_snap ~/.tmux_snap
 echo
 mkdir ~/.vim
 cd ~/.vim
-mkdir bundle
-mkdir autoload
-cd autoload
-echo Installing Pathogen
-git clone https://github.com/tpope/vim-pathogen.git
-echo Downloading Vim Plugins
-cd ../bundle
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 echo Vim Airline
 git clone https://github.com/vim-airline/vim-airline.git
 git clone https://github.com/vim-airline/vim-airline-themes.git
