@@ -64,10 +64,6 @@ onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 "-----------AUTO COMMANDS---------------{{{
 "Write txt files on open
 autocmd BufNewFile *.txt :write
-"Auto-indent html
-autocmd BufWritePre,BufRead *.html :normal gg=G
-"Turn wrapping off when working in html
-autocmd BufWritePre,BufRead *.html setlocal nowrap
 
 "Comment out lines using <localleader>c
 autocmd FileType javascript nnoremap <uffer> <localleader>c I//<esc>
