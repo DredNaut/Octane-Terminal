@@ -1,7 +1,7 @@
 # Octane-Terminal
 If you are looking for an out of the box terminal upgrade look no further. Want to save hours of time trying to figure out how to install new vim plugins. Octane Terminal is your solution. All that is required on your part is cloneing the repository and running the install script, Octane Terminal does the rest for you.
 
-###Based on Vim and Tmux
+### Based on Vim and Tmux
   This package will include the following Vim plugins
     - Pathogen
     - vim-airline
@@ -13,7 +13,7 @@ If you are looking for an out of the box terminal upgrade look no further. Want 
     - powerline-fonts
     - configuration for custom themes
     
-###Installation:
+### Installation:
   Follow these steps for linux:
 ```
     cd
