@@ -4,13 +4,21 @@ If you are looking for an out of the box terminal upgrade look no further. Want 
 ### Based on Vim and Tmux
   This package will include the following Vim plugins
     - Pathogen
+    
     - vim-airline
+    
     - vim-airline-themes
+    
     - tmuxline
+    
     - vim-vinegar
+    
     - vim-buffers
+    
   As well as:
+  
     - powerline-fonts
+    
     - configuration for custom themes
     
 ### Installation:
