@@ -29,5 +29,6 @@ If you are looking for an out of the box terminal upgrade look no further. Want 
     chmod 775 install.h
     ./install.h
 ```
+
     Then choose a powerline font in your preferences:
     Edit > Profile Preferences
