@@ -6,7 +6,7 @@
 " and motivation to learn this powerful tool. Vim has
 " the most open source plugins out of all of the text
 " editors. So once you feel like you have gotten your
-" sealegs and can move around in vim I 
+" sealegs and can move around in vim I
 " I recommend moving onto learning what plugins are
 " and how to install them. It is at that point you will
 " discover the power that is Vim.
@@ -29,10 +29,46 @@ set encoding=utf-8
 "-------------AIRLINE-----------------
 set t_Co=256
 set laststatus=2
+let g:Powerline_symbols = 'unicode'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_theme='wombat'
+" the separator used on the left side
+ let g:airline_left_sep=''
+ " the separator used on the right side
+ let g:airline_right_sep=''
+ " air-line
+  let g:airline_powerline_fonts = 1
+
+  if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+      endif
+
+      " unicode symbols
+      let g:airline_left_sep = '»'
+      let g:airline_left_sep = '▶'
+      let g:airline_right_sep = '«'
+      let g:airline_right_sep = '◀'
+      let g:airline_symbols.linenr = '␊'
+      let g:airline_symbols.linenr = '␤'
+      let g:airline_symbols.linenr = '¶'
+      let g:airline_symbols.branch = '⎇'
+      let g:airline_symbols.paste = 'ρ'
+      let g:airline_symbols.paste = 'Þ'
+      let g:airline_symbols.paste = '∥'
+      let g:airline_symbols.whitespace = 'Ξ'
+
+ "     " airline symbols
+      let g:airline_left_sep = ''
+      let g:airline_left_alt_sep = ''
+      let g:airline_right_sep = ''
+      let g:airline_right_alt_sep = ''
+      let g:airline_symbols.branch = ''
+      let g:airline_symbols.readonly = ''
+      let g:airline_symbols.linenr = ''
+    let g:airline_symbols.whitespace = ''
+
 
 "------------RAINBOW PAREN------------
 let g:rbpt_max = 16
@@ -45,28 +81,40 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+" -------------CPP HIGHLIGHTING--------------
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_class_member_highlight = 1
+let g:cpp_concepts_highlight = 1
 "}}}
 
 "-----------REMAPS-----------------{{{
+" Use ctrl-[hjkl] to select the active split
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 let mapleader = '-'
 inoremap jk <Esc>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :vsplit $MYVIMRC<cr>
+nnoremap <leader>sh :split $MYVIMRC<cr>
+nnoremap <leader>sr :source $MYVIMRC<cr>
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
-
-"Inside heading 
 onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 "Around heading
 onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
+set clipboard=unnamed
 "}}}
 
 "-----------AUTO COMMANDS---------------{{{
 "Write txt files on open
 autocmd BufNewFile *.txt :write
+autocmd BufWritePre * %s/\s\+$//e
 
 "Comment out lines using <localleader>c
-autocmd FileType javascript nnoremap <uffer> <localleader>c I//<esc>
+autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 autocmd FileType cpp nnoremap <buffer> <localleader>c I//<esc>
 autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
 
@@ -76,7 +124,7 @@ autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 autocmd FileType cpp :iabbrev <buffer> iff if ()<left>
 
 augroup testgroup
-    autocmd! 
+    autocmd!
     autocmd FileType cpp nnoremap <buffer> <localleader>f Vatzf
 augroup END
 
@@ -95,24 +143,14 @@ augroup END
 "These snips are set for usage in cpp only.
 augroup filetype_cpp
     autocmd!
+    autocmd FileType cpp setlocal foldmethod=marker
     autocmd FileType cpp iabbrev <buffer> incio #include <iostream>
     autocmd FileType cpp iabbrev <buffer> incos #include <ostream>
     autocmd FileType cpp iabbrev <buffer> incve #include <vector>
     autocmd FileType cpp iabbrev <buffer> incfs #include <fstream>
     autocmd FileType cpp iabbrev <buffer> incal #include <algorithm>
     autocmd FileType cpp iabbrev <buffer> inc #include
-    autocmd FileType cpp iabbrev <buffer> tempT template <class Type>
-    autocmd FileType cpp iabbrev <buffer> mysig //Jared Knutson<cr>//jaredknutson@nevada.unr.edu
-    autocmd FileType cpp iabbrev <buffer> usname using namespace std;
-    autocmd FileType cpp iabbrev <buffer> intmain int main ()<Esc>o{<Esc>o}<Esc>O<tab>
-    autocmd FileType cpp iabbrev <buffer> fori for (int i = 0; i <h; i++)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0f*s
-    autocmd FileType cpp iabbrev <buffer> forj for (int j = 0; j <h; j++)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0f*s
-    autocmd FileType cpp iabbrev <buffer> forrow for (int row = 0; row <h; row++)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0f*s
-    autocmd FileType cpp iabbrev <buffer> forcol for (int col = 0; col <h; col++)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0f*s
-    autocmd FileType cpp iabbrev <buffer> whileloop while (h)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0f*s
-    autocmd FileType cpp iabbrev <buffer> intf int  (h)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0ea
-    autocmd FileType cpp iabbrev <buffer> voidf void (h)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0ea
-    autocmd FileType cpp iabbrev <buffer> doubf double (h)<Esc>o{<Esc>o}<Esc>O<tab>*<Esc>(0ea
+    autocmd FileType cpp iabbrev <buffer> mysig //Jared Knutson<cr>//jaredknutson@nevada.unr.edu autocmd FileType cpp iabbrev <buffer> usname using namespace std;
     autocmd FileType cpp iabbrev <buffer> cout cout <<* << endl;<Esc>F*s
     autocmd FileType cpp iabbrev <buffer> squash cout <<  "Bug Tracker 1" << endl;<Esc>F*s
     autocmd FileType cpp iabbrev <buffer> cin cin >>*;<Esc>F*s
@@ -139,7 +177,7 @@ augroup filetype_sh
 augroup END
 "}}}
 
-"-----------DISABLED KEYS----------------{{{ 
+"-----------DISABLED KEYS----------------{{{
 inoremap <BS> <Nop>
 inoremap <Del> <Nop>
 nnoremap <BS> <Nop>
@@ -152,6 +190,7 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Up> <Nop>
+nnoremap <q> <Nop>
 "}}}
 
 "-----------THEME PREFERENCES----------------{{{
@@ -170,24 +209,28 @@ nnoremap <Up> <Nop>
 " When using vim-surround press 'cs' followed by the current surrounder and
 " then new surrounder.
 "
-" When using vim commentary use gc to comment and gcgc to uncomment
+" When using vim commentary use 'gc' to comment and 'gcgc' to uncomment
+"
+"
 "
 " My favorite theme finally
-colo Tomorrow-Night 
+colo vimbrant
 " :<Tab> will be useful now
 set wildmenu
+
 " Give me sane tabs
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 " Numbered lines enabled
 set relativenumber
 set number
 
 "Use z-f and z-o for all basic folding needs
 set foldmethod=manual
+
 "Keep that damn cursor in the center of the screen
 set scrolloff=90
 "}}}
-
 
 "-----------VIMSCRIPT TRIALS--------------{{{
 "let foo = "bar"
@@ -201,7 +244,6 @@ set scrolloff=90
 "Next example shows the use of setting registers
 "let @a = "hello!"
 "Next example shows the use of local variable scoping
-"let b:hello = "world"
 "echo b:hello
 "Next example will demonstrate the use of if statement
 "if 0
@@ -237,6 +279,7 @@ set scrolloff=90
 "echo 010
 "echo 100.45
 "echo 5.45e+3
-"String concatenation dot operator for concating 
+"String concatenation dot operator for concating
 "echo "Hello, " . "world"
 "}}}
+
