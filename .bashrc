@@ -1,3 +1,7 @@
+#https://askubuntu.com/questions/558280/changing-colour-of-text-and-background-of-termina://askubuntu.com/questions/558280/changing-colour-of-text-and-background-of-terminal
+
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -58,9 +62,18 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     if [[ ${EUID} == 0 ]] ; then
-        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+        PS1=$'\u2234\u2192\u263f\u2605'
     else
-        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\] '
+        #
+        # MAGIC LINE FOR POWER LINE TERMINAL GOODNESS
+        #
+
+        PS1=$'\[\033[97;2;104m\] \u \[\033[94;2;40m\]\xee\x82\xb0\[\033[30;2;107m\]\xee\x82\xb0\[\033[30;2;107m\] \W \[\033[97;2;49m\]\xee\x82\xb0\e[0m '
+        #
+        #
+        #
+        #
+
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h \w \$ '
@@ -123,3 +136,7 @@ fi
 if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
+
+export PGHOST=localhost
+export TERM=xterm-256color
+export CDPATH=~/.symlink
