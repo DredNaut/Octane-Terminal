@@ -102,15 +102,14 @@ nnoremap <leader>sh :split $MYVIMRC<cr>
 nnoremap <leader>sr :source $MYVIMRC<cr>
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
-onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-"Around heading
-onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 set clipboard=unnamed
 "}}}
 
 "-----------AUTO COMMANDS---------------{{{
-"Write txt files on open
+"Write txt files on open, similar to touching the file before opening
 autocmd BufNewFile *.txt :write
+"Remove all trailing whitespace from a file on writing \s = space, \+ = repeat
+"one or more times, $ = end of line
 autocmd BufWritePre * %s/\s\+$//e
 
 "Comment out lines using <localleader>c
@@ -123,16 +122,13 @@ autocmd FileType python :iabbrev <buffer> iff if:<left>
 autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 autocmd FileType cpp :iabbrev <buffer> iff if ()<left>
 
-augroup testgroup
-    autocmd!
-    autocmd FileType cpp nnoremap <buffer> <localleader>f Vatzf
-augroup END
-
-"autocmd BufWrite * :echom "Writing Buffer!"
-"autocmd BufWrite * :sleep 200m
 "}}}
 
+"-----------AUTO-COMMANDS FOR FILES--------------------"{{{
+
 "-----------VIMSCRIPT FILE SETTINGS --------------------{{{
+
+" Any command in this group will be activated for vim files only
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -144,16 +140,6 @@ augroup END
 augroup filetype_cpp
     autocmd!
     autocmd FileType cpp setlocal foldmethod=marker
-    autocmd FileType cpp iabbrev <buffer> incio #include <iostream>
-    autocmd FileType cpp iabbrev <buffer> incos #include <ostream>
-    autocmd FileType cpp iabbrev <buffer> incve #include <vector>
-    autocmd FileType cpp iabbrev <buffer> incfs #include <fstream>
-    autocmd FileType cpp iabbrev <buffer> incal #include <algorithm>
-    autocmd FileType cpp iabbrev <buffer> inc #include
-    autocmd FileType cpp iabbrev <buffer> mysig //Jared Knutson<cr>//jaredknutson@nevada.unr.edu autocmd FileType cpp iabbrev <buffer> usname using namespace std;
-    autocmd FileType cpp iabbrev <buffer> cout cout <<* << endl;<Esc>F*s
-    autocmd FileType cpp iabbrev <buffer> squash cout <<  "Bug Tracker 1" << endl;<Esc>F*s
-    autocmd FileType cpp iabbrev <buffer> cin cin >>*;<Esc>F*s
 augroup END
 "}}}
 
@@ -161,21 +147,15 @@ augroup END
 "This is not enough build more
 augroup filetype_python
     autocmd!
-    autocmd FileType python iabbrev <buffer> isys import sys
-    autocmd FileType python iabbrev <buffer> fori for i in range(j):
-    autocmd FileType python iabbrev <buffer> predfor if any(pred(x.item) for x in sequence):
 augroup END
 "}}}
 
 "-----------BASHSCRIPT FILE SETTINGS---------------{{{
-"These are buggy as HELL... plz fixx!
 augroup filetype_sh
     autocmd!
     autocmd FileType sh iabbrev <buffer> binbash #!/bin/bash
-    autocmd FileType sh iabbrev <buffer> fori for i in $( ls ); do<cr>j<cr>done<esc>(fis
-    autocmd FileType sh iabbrev <buffer> while while [ $COUNTER -lt 10 ]; do<cr>j<cr>let COUNTER=COUNTER+1<cr>done<esc>kkfjs
 augroup END
-"}}}
+"}}}"}}}
 
 "-----------DISABLED KEYS----------------{{{
 inoremap <BS> <Nop>
@@ -192,94 +172,3 @@ nnoremap <Down> <Nop>
 nnoremap <Up> <Nop>
 nnoremap <q> <Nop>
 "}}}
-
-"-----------THEME PREFERENCES----------------{{{
-"Maybe use this is the future
-"set statusline=%f\ -\ FileType:\ %y
-"set statusline=%l/%L
-"set statusline=[%04l]
-"set statusline=%.20F
-"set statusline=%{fugitive#statusline()}
-"More at :help statusline
-"}}}
-
-" -----------CUSTOM PREFS-----------------{{{
-" When using vim-vinegar press '-' to search for a new file in tree.
-
-" When using vim-surround press 'cs' followed by the current surrounder and
-" then new surrounder.
-"
-" When using vim commentary use 'gc' to comment and 'gcgc' to uncomment
-"
-"
-"
-" My favorite theme finally
-colo vimbrant
-" :<Tab> will be useful now
-set wildmenu
-
-" Give me sane tabs
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
-
-" Numbered lines enabled
-set relativenumber
-set number
-
-"Use z-f and z-o for all basic folding needs
-set foldmethod=manual
-
-"Keep that damn cursor in the center of the screen
-set scrolloff=90
-"}}}
-
-"-----------VIMSCRIPT TRIALS--------------{{{
-"let foo = "bar"
-"echo foo
-"Using let instead of set allows for the use of the whole power of vimscript
-"let &textwidth = &textwidth + 10
-"set textwidth?
-"Next example shows the use of local variables
-"let &l:number = 1
-"let &l:number = 0
-"Next example shows the use of setting registers
-"let @a = "hello!"
-"Next example shows the use of local variable scoping
-"echo b:hello
-"Next example will demonstrate the use of if statement
-"if 0
-"   echo "if"
-"elseif "nope!"
-"   echom "elseif"
-"else
-"   echom "finally!"
-"endif
-"
-"More if statements
-"if 10 ==11
-"   echom "bar"
-"elseif 10 == 10
-"   echom "second"
-"endif
-"==# case-sensitive ==? case-insensitive
-"
-"Functions!!!! must always start with a capital letter
-"function Meow()
-"   echom "Meow!"
-"endfunction
-"call Meow()
-"Pratical function to return true if textwidth is > 80
-"function TextwidthIsTooWide()
-"   if &1:textwidth ># 80
-"       return 1
-"   endif
-"endfunction
-"Number Formats: decimal, hex, octal, float, scientific
-"echo 100
-"echo 0xff
-"echo 010
-"echo 100.45
-"echo 5.45e+3
-"String concatenation dot operator for concating
-"echo "Hello, " . "world"
-"}}}
-
